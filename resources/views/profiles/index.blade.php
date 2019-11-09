@@ -10,11 +10,13 @@
         </div>
         <div class="col-9">
         <div class="d-flex justify-content-between align-items-baseline">
-            <h1>{{ $user->username }}</h1>
-
-        @can('update', $user->profile)
-            <a href="/p/create" class="btn btn-primary btn-sm" style="height:50%;">Add New Post</a>
-        @endcan
+            <div class="d-flex align-items-center">
+                <h1 class="pr-3">{{ $user->username }}</h1>
+                <follow-button user-id="{{$user->id}}" follows="{{ $follows }}"></follow-button>
+            </div>
+            @can('update', $user->profile)
+                <a href="/p/create" class="btn btn-primary btn-sm" style="height:50%;">Add New Post</a>
+            @endcan
        
         </div>
             @can('update', $user->profile)
@@ -22,8 +24,8 @@
             @endcan
             <div class="row">
                 <div class="col-2"> <strong>{{$user->posts->count()}}</strong> posts</div>
-                <div class="col-2"><strong>213k</strong> followers</div>
-                <div class="col-2"><strong>213k</strong> following</div>
+                <div class="col-2"><strong>{{$user->profile->followers->count()}}</strong> followers</div>
+                <div class="col-2"><strong>{{$user->following->count()}}</strong> following</div>
             </div>
             <div class="font-weight-bold pt-3">{{$user->profile->title}}</div>
             <div class="pt-2">{{$user->profile->description}}</div>

@@ -11,11 +11,16 @@
 |
 */
 
+use App\Http\Controllers\FollowsController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
+
+Route::post('/follow/{user}', 'FollowsController@store');
+
 
 Route::get('/p/create', 'PostsController@create')->name('p.create');
 Route::post('/p', 'PostsController@store')->name('p.store');
